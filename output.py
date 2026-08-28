@@ -249,8 +249,10 @@ def generate_graphs_primary(dependent, independent='epochs', epoch_number=15, cl
 
     if dependent in ['fnr', 'fpr']:
         ylabel = dependent.upper().replace('_', ' ')
+        unit = ''
     else:
         ylabel = dependent.capitalize().replace('_', ' ')
+        unit = ' (seconds)' if dependent == 'epoch_duration' else ''
 
     title = f'Graph of {ylabel} vs. {xlabel}'    
 
@@ -271,7 +273,7 @@ def generate_graphs_primary(dependent, independent='epochs', epoch_number=15, cl
     _, ax = plt.subplots()
 
     ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel(ylabel, fontsize=12)
+    ax.set_ylabel(ylabel+unit, fontsize=12)
     ax.set_title(title, fontsize=16)
 
     ax.errorbar(X, eval(f'all_mean{Y_index}'),
@@ -437,8 +439,10 @@ def generate_graphs_extension(dependent, independent='subset_size',
 
     if dependent in ['fnr', 'fpr']:
         ylabel = dependent.upper().replace('_', ' ')
+        unit = ''
     else:
         ylabel = dependent.capitalize().replace('_', ' ')
+        unit = ' (seconds)' if dependent == 'epoch_duration' else ''
 
     title = f'Graph of {ylabel} vs. {xlabel} for '
 
@@ -488,7 +492,7 @@ def generate_graphs_extension(dependent, independent='subset_size',
     _, ax = plt.subplots()
 
     ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel(ylabel, fontsize=12)
+    ax.set_ylabel(ylabel+unit, fontsize=12)
     ax.set_title(title, fontsize=16)
 
     if independent != 'subset_size':
